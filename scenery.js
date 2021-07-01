@@ -1,28 +1,19 @@
-class Enemy {
-  dx;
-  image = document.getElementById("enemy");
+class Scenery {
+  dx = 3;
 
-  constructor(x, y) {
+  constructor(x, y, width, height, image) {
     this.x = x;
     this.y = y;
-    this.width = 20;
-    this.height = 20;
-    this.inContact = false;
-
-    this.newSpeed();
+    this.width = width;
+    this.height = height;
+    this.image = image;
   }
-
-  getSpeed = () => getRandomIntInclusive(4, 7);
-
-  newSpeed = () => (this.dx = this.getSpeed());
 
   clear = () => ctx.clearRect(this.x, this.y, this.width, this.height);
 
   reset = () => {
     this.clear();
     this.x = canvas.width;
-    this.y = getRandomIntInclusive(225, canvas.height);
-    this.newSpeed();
   };
 
   move = () => {

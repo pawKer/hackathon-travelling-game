@@ -19,8 +19,8 @@ class Sprite {
       }
     } else if (upPressed) {
       this.y -= this.dy;
-      if (this.y < 0) {
-        this.y = 0;
+      if (this.y < 225) {
+        this.y = 225;
       }
     }
   };

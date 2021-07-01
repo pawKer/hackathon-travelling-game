@@ -6,6 +6,8 @@ var timeElement = document.getElementById("time");
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
+var palmTree = document.getElementById("palm-tree");
+
 const START_TIME = new Date();
 var upPressed = false;
 var downPressed = false;
@@ -14,17 +16,28 @@ var points = 500;
 var gameOver = false;
 
 var spriteX = 20;
-var spriteY = 40;
+var spriteY = 490;
 var sprite = new Sprite(spriteX, spriteY);
 
-var enemyCount = 10;
+var enemyCount = 6;
 var enemies = [];
 addEnemies(enemyCount);
+
+var sceneries = [
+  new Scenery(canvas.width - 600, 190, 50, 70, palmTree),
+  new Scenery(canvas.width, 190, 50, 70, palmTree),
+];
 
 function draw() {
   if (!gameOver) {
     updateTime();
-    
+
+    sceneries.forEach((scenery) => {
+      scenery.clear();
+      scenery.move();
+      scenery.draw();
+    });
+
     enemies.forEach((enemy, idx) => {
       checkEnemyCollision(enemy);
 
@@ -42,10 +55,15 @@ function draw() {
     checkGameOver();
   }
 }
+
+function moveScenery() {
+  roadMarking.x -= 5;
+}
+
 function updateTime() {
   var currentTime = new Date();
   var secondsSinceStart = (currentTime.getTime() - START_TIME.getTime()) / 1000;
-  timeElement.innerText =  "Time: " + secondsSinceStart + "s";
+  timeElement.innerText = "Time: " + secondsSinceStart + "s";
 }
 
 function updateScore() {
@@ -103,7 +121,7 @@ function getRandomIntInclusive(min, max) {
 function addEnemies(enemyCount) {
   for (let i = 0; i < enemyCount; i++) {
     enemies.push(
-      new Enemy(canvas.width, getRandomIntInclusive(0, canvas.height))
+      new Enemy(canvas.width, getRandomIntInclusive(225, canvas.height))
     );
   }
 }
