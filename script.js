@@ -20,7 +20,7 @@ var volcano = document.getElementById("volcano");
 var carRental = document.getElementById("car-rental");
 var pagode = document.getElementById("pagode");
 
-const START_TIME = new Date();
+var START_TIME;
 var secondsSinceStart = 0;
 
 var upPressed = false;
@@ -225,6 +225,7 @@ function newScenary() {
 function startGame(e) {
   if(secondsSinceStart === 0) {
     startScreen.style.display = "none";
+    START_TIME = new Date();
     setInterval(draw, 10);
     setInterval(newScenary, 1000);
   }
