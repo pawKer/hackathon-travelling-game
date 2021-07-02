@@ -1,2 +1,2 @@
-# booking-game
+# trave-game
 

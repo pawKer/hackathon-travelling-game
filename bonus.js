@@ -1,19 +1,21 @@
-class Scenery {
-  dx = 2;
+class Bonus {
+  dx = 7;
+  image = document.getElementById("bonus");
 
-  constructor(x, y, width, height, image) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.width = width;
-    this.height = height;
-    this.image = image;
+    this.width = 50;
+    this.height = 20;
+    this.inContact = false;
   }
 
   clear = () => ctx.clearRect(this.x, this.y, this.width, this.height);
 
   reset = () => {
     this.clear();
-    this.x = canvas.width + this.x;
+    this.x = canvas.width + 5000;
+    this.y = getRandomIntInclusive(225, canvas.height);
   };
 
   move = () => {

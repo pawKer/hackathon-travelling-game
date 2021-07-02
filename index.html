@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
     <style>
+      html, body {
+          margin: 0; height: 100%; overflow: hidden
+      }
+      
       * {
         padding: 0;
         margin: 0;
       }
       canvas {
-        background-image: url('images/background.png');
+        background-image: url("images/background.png");
         display: block;
         margin: 0 auto;
       }
@@ -18,15 +25,40 @@
         font-size: 1em;
       }
       body {
-        font-family: 'Press Start 2P', cursive;
+        font-family: "Press Start 2P", cursive;
       }
       img {
-          display: none;
+        display: none;
+      }
+      .life {
+        display: inline-block;
+        height: 30px;
+        width: 30px;
       }
       .stats {
-        display:flex;
+        display: flex;
         justify-content: space-between;
         padding: 5px;
+      }
+
+      .instructions {
+        text-align: center;
+        padding: 10px;
+      }
+
+      .start_screen {
+          position: absolute;
+          width: 50%;
+          background-color: blue;
+          margin-left: 25%;
+          height: 500px;
+          text-align: center;
+          padding-top: 10px;
+          color: cornsilk;
+      }
+
+      .game-title {
+          margin-top: 80px;
       }
     </style>
   </head>
@@ -34,18 +66,57 @@
   <body>
     <div class="stats">
       <p id="time"></p>
-      <p id="score"></p>
+      <p id="score">
+        Lives:<img id="life" src="images/heart.png" class="life" /><img
+          id="life"
+          src="images/heart.png"
+          class="life"
+        /><img id="life" src="images/heart.png" class="life" /><img
+          id="life"
+          src="images/heart.png"
+          class="life"
+        /><img id="life" src="images/heart.png" class="life" /></p>
+    </div>
+
+    <div id="startScreen" class="start_screen">
+        <h1>Globetrotter Game</h1>
+        <p class="game-title">See how long you can travel for</p>
+        <p class="game-title">Hit the space bar to start!</p>
+    </div>
+
+    <div id="endScreen" class="start_screen" style="display: none">
+        <h1>Game Over!</h1>
+        <p id="endMessage" class="game-title"></p>
+        <p class="game-title">Refresh the page to play again</p>
     </div>
 
     <canvas id="gameCanvas" width="1080" height="720"></canvas>
 
-    <img id="explorer" src="images/explorer.png"/>
-    <img id="enemy" src="images/covid.png"/>
-    <img id="road-marking" src="images/road-marking.png"/>
-    <img id="palm-tree" src="images/palm-tree.png"/>
+    <div class="instructions">
+      <p>How to play:</p>
+      <br/>
+      <p>Travel the world safely, avoiding travel restrictions and getting the vaccine.</p>
+    </div>
+
+    <img id="explorer_1" src="images/sprite_walking_1.png" />
+    <img id="explorer_2" src="images/sprite_walking_2.png" />
+    <img id="explorer_explode" src="images/sprite_explode.png" />
+    <img id="enemy" src="images/no_entry.png" />
+    <img id="bonus" src="images/vaccine.png" />
+    <img id="road-marking" src="images/road-marking.png" />
+    <img id="palm-tree" src="images/palm-tree.png" />
+    <img id="empire" src="images/empire.png" />
+    <img id="big-ben" src="images/big-ben.png" />
+    <img id="hotel" src="images/hotel.png" />
+    <img id="eiffel-tower" src="images/eiffel_tower.png" />
+    <img id="volcano" src="images/volcano.png" />
+    <img id="rio_jesus" src="images/rio_jesus.png" />
+    <img id="car-rental" src="images/car-rental.png" />
+    <img id="pagode" src="images/japanese_pagode.png" />
 
     <script src="sprite.js"></script>
     <script src="enemy.js"></script>
+    <script src="bonus.js"></script>
     <script src="scenery.js"></script>
     <script src="script.js"></script>
   </body>
