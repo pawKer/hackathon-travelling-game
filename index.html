@@ -74,6 +74,25 @@
         list-style: armenian;
       }
 
+      .leaderboard-list {
+        list-style-position: inside; 
+        display: table; 
+        text-align: left; 
+        margin: 0 auto;
+      }
+
+      .leaderboard-list > li:first-child {
+        color: gold;
+      }
+
+      .leaderboard-list > li:nth-child(2) {
+        color: silver;
+      }
+
+      .leaderboard-list > li:nth-child(3) {
+        color: #D0A766;
+      }
+
       .start_screen {
         margin-left: auto;
         margin-right: auto;
@@ -176,7 +195,7 @@
     <div class="leaderboard">
       <p>Leaderboard:</p>
       <br />
-      <ol id="leaderboard-list" style="list-style-position: inside; display: table; text-align: left; margin: 0 auto;">
+      <ol id="leaderboard-list" class="leaderboard-list">
       </ol>
     </div>
 
