@@ -60,16 +60,10 @@ function draw() {
     increaseEnemies();
 
 
-    sceneryInUse.forEach((scenery, index) => {
+    sceneryInUse.forEach((scenery) => {
       scenery.clear();
       scenery.move();
-
-      if (scenery.x + this.width <= 0) {
-        sceneryInUse.splice(index, 1);
-      }
-      else {
-        scenery.draw();
-      }
+      scenery.draw();
     });
 
     enemies.forEach((enemy, idx) => {
@@ -216,9 +210,6 @@ function newScenary() {
 
   if (!sceneryInUse.includes(selected)) {
     sceneryInUse.push(selected);
-  }
-  else{
-      newScenary();
   }
 }
 
