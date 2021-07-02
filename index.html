@@ -68,6 +68,12 @@
         padding: 10px;
       }
 
+      .leaderboard {
+        text-align: center;
+        padding: 10px;
+        list-style: armenian;
+      }
+
       .start_screen {
         margin-left: auto;
         margin-right: auto;
@@ -107,7 +113,7 @@
     </style>
   </head>
 
-  <body>
+  <body onload="getHighScores()">
     <div class="stats">
       <p id="time"></p>
       <p id="score">
@@ -167,6 +173,12 @@
         Travel the world safely, avoiding travel restrictions and getting the
         vaccine.
       </p>
+    </div>
+    <div class="leaderboard">
+      <p>Leaderboard:</p>
+      <br />
+      <ol id="leaderboard-list" style="list-style-position: inside; display: table; text-align: left; margin: 0 auto;">
+      </ol>
     </div>
 
     <img id="explorer_1" src="images/sprite_walking_1.png" />
