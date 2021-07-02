@@ -59,7 +59,6 @@ function draw() {
     updateTime();
     increaseEnemies();
 
-
     sceneryInUse.forEach((scenery) => {
       scenery.clear();
       scenery.move();
@@ -103,19 +102,23 @@ function updateTime() {
 
 function updateScore() {
   var elems = document.getElementsByClassName("life");
-  let noLives = elems.length;
-  if (noLives > points / 100) {
-    while (noLives != points / 100) {
-      elems[noLives - 1].remove();
-      noLives--;
+  if (elems) {
+    let noLives = elems.length;
+    if (noLives > points / 100) {
+      while (noLives != points / 100) {
+        elems[noLives - 1].remove();
+        noLives--;
+      }
+    } else if (points / 100 > noLives) {
+      let elem = document.createElement("img");
+      elem.src = "images/heart.png";
+      elem.className = "life";
+      elem.id = "life";
+      scoreElement.appendChild(elem);
+    } else if (points === 0) {
+      scoreElement.innerText = "Game over!";
     }
-  } else if (points / 100 > noLives) {
-    let elem = document.createElement("img");
-    elem.src = "images/heart.png";
-    elem.className = "life";
-    elem.id = "life";
-    scoreElement.appendChild(elem);
-  } else if (points === 0) {
+  } else {
     scoreElement.innerText = "Game over!";
   }
 }
@@ -126,8 +129,9 @@ function checkGameOver() {
     points = 0;
     updateScore();
     setTimeout(() => {
-        endScreen.style.display = "block";
-        endMessage.innerText = "You explored the world for "+secondsSinceStart+"s";
+      endScreen.style.display = "block";
+      endMessage.innerText =
+        "You explored the world for " + secondsSinceStart + "s";
     });
   }
 }
@@ -171,8 +175,8 @@ function keyDownHandler(e) {
     upPressed = true;
   } else if (e.key == "Down" || e.key == "ArrowDown") {
     downPressed = true;
-  } else if(e.which == 32){
-      startGame();
+  } else if (e.which == 32) {
+    startGame();
   }
 }
 
@@ -206,7 +210,7 @@ function addEnemies(enemyCount) {
 }
 
 function newScenary() {
-  var selected = sceneries[getRandomIntInclusive(0, (sceneries.length - 1))];
+  var selected = sceneries[getRandomIntInclusive(0, sceneries.length - 1)];
 
   if (!sceneryInUse.includes(selected)) {
     sceneryInUse.push(selected);
@@ -214,11 +218,10 @@ function newScenary() {
 }
 
 function startGame(e) {
-  if(secondsSinceStart === 0) {
+  if (secondsSinceStart === 0) {
     startScreen.style.display = "none";
     START_TIME = new Date();
     setInterval(draw, 10);
     setInterval(newScenary, 1000);
   }
 }
-
