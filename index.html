@@ -7,11 +7,33 @@
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBONIU4eP_e_YKAaZX2T-NOjELBko2jSPQ",
+        authDomain: "hackathon-travelling-game.firebaseapp.com",
+        projectId: "hackathon-travelling-game",
+        storageBucket: "hackathon-travelling-game.appspot.com",
+        messagingSenderId: "171503770930",
+        appId: "1:171503770930:web:748ae99e0400d8ef474b2b",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      var db = firebase.firestore();
+    </script>
+    <script src="highscores.js"></script>
     <style>
-      html, body {
-          margin: 0; height: 100%; overflow: hidden
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
       }
-      
+
       * {
         padding: 0;
         margin: 0;
@@ -47,21 +69,40 @@
       }
 
       .start_screen {
-          margin-left: auto;
-          margin-right: auto;
-          left: 0;
-          right: 0;
-          position: absolute;
-          width: 800px;
-          background-color: blue;
-          height: 500px;
-          text-align: center;
-          padding-top: 10px;
-          color: cornsilk;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        position: absolute;
+        width: 800px;
+        background-color: blue;
+        height: 500px;
+        text-align: center;
+        padding-top: 10px;
+        color: cornsilk;
+      }
+
+      .high-score-input {
+        font-family: "Press Start 2P";
+        font-size: 30px;
+        height: 50px;
+        text-align: center;
+        margin-top: 10px;
+        background-color: #0000b2;
+        color: cornsilk;
+      }
+
+      .high-score-button {
+        font-family: "Press Start 2P";
+        font-size: 20px;
+        height: 40px;
+        margin-top: 10px;
+        background-color: chartreuse;
+        padding: 10px;
       }
 
       .game-title {
-          margin-top: 80px;
+        margin-top: 80px;
       }
     </style>
   </head>
@@ -78,27 +119,54 @@
           id="life"
           src="images/heart.png"
           class="life"
-        /><img id="life" src="images/heart.png" class="life" /></p>
+        /><img id="life" src="images/heart.png" class="life" />
+      </p>
     </div>
 
     <div id="startScreen" class="start_screen">
-        <h1>Globetrotter Game</h1>
-        <p class="game-title">See how long you can travel for</p>
-        <p class="game-title">Hit the space bar to START!</p>
+      <h1>Globetrotter Game</h1>
+      <p class="game-title">See how long you can travel for</p>
+      <p class="game-title">Hit the space bar to START!</p>
     </div>
 
     <div id="endScreen" class="start_screen" style="display: none">
-        <h1>Game Over!</h1>
-        <p id="endMessage" class="game-title"></p>
-        <p class="game-title">Refresh the page to PLAY AGAIN</p>
+      <h1>Game Over!</h1>
+      <p id="endMessage" class="game-title"></p>
+      <div id="high-score-submit">
+        <form onsubmit="submitHighScore(event)" style="margin-top: 10px">
+          <p style="margin-top: 10px">Enter name:</p>
+          <input
+            type="text"
+            class="high-score-input"
+            id="input_name"
+            name="input_name"
+          /><br />
+          <input
+            type="submit"
+            class="high-score-button"
+            value="Submit high score"
+          />
+        </form>
+      </div>
+      <p id="submit-confirm" style="display:none; margin-top: 10px; color: gold">Submitted!</p>
+      <form onsubmit="reloadPage(event)" style="margin-top: 150px">
+        <input
+          type="submit"
+          class="high-score-button"
+          value="PLAY AGAIN"
+        />
+      </form>
     </div>
 
     <canvas id="gameCanvas" width="1080" height="720"></canvas>
 
     <div class="instructions">
       <p>How to play:</p>
-      <br/>
-      <p>Travel the world safely, avoiding travel restrictions and getting the vaccine.</p>
+      <br />
+      <p>
+        Travel the world safely, avoiding travel restrictions and getting the
+        vaccine.
+      </p>
     </div>
 
     <img id="explorer_1" src="images/sprite_walking_1.png" />
