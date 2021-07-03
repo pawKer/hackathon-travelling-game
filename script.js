@@ -1,3 +1,4 @@
+// Prevents scrolling behaviour when playing game
 window.addEventListener("keydown", function(e) {
   if(["Space","ArrowUp","ArrowDown"].indexOf(e.code) > -1) {
       e.preventDefault();
@@ -41,6 +42,8 @@ var sprite = new Sprite(spriteX, spriteY);
 var wait = 1;
 var enemyCount = 3;
 var enemies = [];
+
+showStartingLives()
 addEnemies(enemyCount);
 
 var bonus = new Bonus(canvas.width, getRandomIntInclusive(225, canvas.height));
@@ -229,5 +232,15 @@ function startGame(e) {
     START_TIME = new Date();
     setInterval(draw, 10);
     setInterval(newScenary, 1000);
+  }
+}
+
+function showStartingLives() {
+  for(let i = 0; i < points / 100; i++) {
+    let heart = document.createElement("img")
+    heart.src = "images/heart.png"
+    heart.className = "life"
+    heart.id = "life" + (i+1);
+    scoreElement.appendChild(heart)
   }
 }
